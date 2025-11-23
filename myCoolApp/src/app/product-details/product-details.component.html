@@ -1,17 +1,29 @@
 <ActionBar title="Szczegóły produktu"></ActionBar>
 
-<StackLayout class="p-20">
-    
-    <Label *ngIf="loading" text="Ładowanie..." class="text-center text-lg"></Label>
+<StackLayout class="p-4">
 
-    <StackLayout *ngIf="!loading">
-        
-        <Image [src]="product.thumbnail" height="180" stretch="aspectFill"></Image>
+    <Label *ngIf="loading" text="Ładowanie..." class="text-center mt-4"></Label>
 
-        <Label class="text-2xl font-bold mt-3" [text]="product.title"></Label>
-        <Label class="text-base mt-1" [text]="product.description"></Label>
+    <Label *ngIf="error && !loading"
+           [text]="error"
+           class="text-red-500 text-center"></Label>
 
-        <Label class="text-lg mt-3 font-semibold" [text]="'Cena: ' + product.price + ' USD'"></Label>
+    <StackLayout *ngIf="product && !loading">
+
+        <Image [src]="product.thumbnail"
+               stretch="aspectFit"
+               height="200"
+               class="mb-4"></Image>
+
+        <Label [text]="product.title"
+               class="font-bold text-xl mb-2"></Label>
+
+        <Label [text]="product.description"
+               class="text-base mb-2"></Label>
+
+        <Label [text]="'Cena: ' + product.price + ' USD'"
+               class="text-lg text-green-600"></Label>
 
     </StackLayout>
+
 </StackLayout>
