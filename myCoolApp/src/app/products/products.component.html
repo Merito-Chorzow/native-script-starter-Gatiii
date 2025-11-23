@@ -2,12 +2,17 @@
 
 <StackLayout class="p-4">
 
-    <Label *ngIf="loading" text="Ładowanie..." class="text-center mt-4"></Label>
+    <Label *ngIf="loading"
+           text="Ładowanie..."
+           class="text-center mt-4"></Label>
 
-    <Label *ngIf="error && !loading" [text]="error" class="text-red-500 text-center"></Label>
+    <Label *ngIf="error && !loading"
+           [text]="error"
+           class="text-red-500 text-center"></Label>
 
     <ListView *ngIf="!loading && !error"
-              [items]="products">
+              [items]="products"
+              (itemTap)="onItemTap($event)">
 
         <ng-template let-item="item">
             <Label [text]="item.title" class="p-2 border-b"></Label>
@@ -17,10 +22,12 @@
 
     <Button class="btn btn-primary mt-4"
             text="Dodaj produkt"
-            [nsRouterLink]="['/add']"></Button>
+            [nsRouterLink]="['/add']">
+    </Button>
 
     <Button class="btn btn-secondary mt-2"
             text="Ustawienia"
-            [nsRouterLink]="['/settings']"></Button>
+            [nsRouterLink]="['/settings']">
+    </Button>
 
 </StackLayout>
