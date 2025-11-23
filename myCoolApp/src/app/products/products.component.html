@@ -1,0 +1,14 @@
+<ActionBar title="Lista produktów"></ActionBar>
+
+<StackLayout class="p-20">
+
+    <ListView [items]="products" (itemTap)="onItemTap($event)">
+        <ng-template let-item="item">
+            <Label [text]="item.name"></Label>
+        </ng-template>
+    </ListView>
+
+    <Button text="Dodaj produkt" marginTop="20" [nsRouterLink]="['/add']"></Button>
+    <Button text="Ustawienia" marginTop="10" [nsRouterLink]="['/settings']"></Button>
+
+</StackLayout>

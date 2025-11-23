@@ -1,0 +1,10 @@
+<ActionBar title="Dodaj produkt"></ActionBar>
+
+<StackLayout class="p-20">
+
+    <TextField [(ngModel)]="name" hint="Nazwa"></TextField>
+    <TextField [(ngModel)]="code" hint="Kod"></TextField>
+
+    <Button text="Zapisz" (tap)="save()"></Button>
+
+</StackLayout>
