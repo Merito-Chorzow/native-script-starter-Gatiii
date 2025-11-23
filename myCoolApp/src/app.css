@@ -1,3 +1,43 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.page {
+    padding: 20;
+    background-color: #f5f5f5;
+}
+
+.list {
+    height: 70%;
+}
+
+.product-card {
+    padding: 15;
+    margin: 5 10;
+    background-color: white;
+    border-radius: 8;
+    elevation: 4;
+}
+
+.product-title {
+    font-size: 18;
+    font-weight: bold;
+}
+
+.product-subtitle {
+    font-size: 14;
+    color: #666;
+}
+
+/* Buttons */
+.btn-primary {
+    margin-top: 15;
+    padding: 12;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 8;
+}
+
+.btn-secondary {
+    margin-top: 10;
+    padding: 12;
+    background-color: #d1d5db;
+    border-radius: 8;
+}
+

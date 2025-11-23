@@ -1,21 +1,43 @@
-import { Component } from "@angular/core";
-import { NativeScriptCommonModule, NativeScriptRouterModule } from "@nativescript/angular";
+import { Component, OnInit } from "@angular/core";
+import { NativeScriptCommonModule } from "@nativescript/angular";
+import { RouterExtensions } from "@nativescript/angular";
+import { ProductService } from "./product.service";
 
 @Component({
     selector: "Products",
     standalone: true,
-    imports: [NativeScriptCommonModule, NativeScriptRouterModule],
+    imports: [NativeScriptCommonModule],
     templateUrl: "./products.component.html",
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+    products: any[] = [];
+    loading = true;
+    error: string | null = null;
 
-    products = [
-        { id: 1, name: "Mleko", code: "A1" },
-        { id: 2, name: "Chleb", code: "B2" }
-    ];
+    constructor(
+        private productService: ProductService,
+        private router: RouterExtensions
+    ) {}
 
-    onItemTap(event: any) {
-        const item = this.products[event.index];
-        console.log("Tapped:", item);
+    async ngOnInit() {
+        try {
+            this.products = await this.productService.getProducts();
+            this.loading = false;
+        } catch (err) {
+            this.error = "Nie udało się pobrać produktów.";
+            this.loading = false;
+        }
+    }
+
+    openDetails(id: number) {
+        this.router.navigate(["/details", id]);
+    }
+
+    goToAdd() {
+        this.router.navigate(["/add"]);
+    }
+
+    goToSettings() {
+        this.router.navigate(["/settings"]);
     }
 }

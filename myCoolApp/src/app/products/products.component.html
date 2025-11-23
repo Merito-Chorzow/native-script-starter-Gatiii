@@ -1,14 +1,26 @@
 <ActionBar title="Lista produktów"></ActionBar>
 
-<StackLayout class="p-20">
+<StackLayout class="p-4">
 
-    <ListView [items]="products" (itemTap)="onItemTap($event)">
+    <Label *ngIf="loading" text="Ładowanie..." class="text-center mt-4"></Label>
+
+    <Label *ngIf="error && !loading" [text]="error" class="text-red-500 text-center"></Label>
+
+    <ListView *ngIf="!loading && !error"
+              [items]="products">
+
         <ng-template let-item="item">
-            <Label [text]="item.name"></Label>
+            <Label [text]="item.title" class="p-2 border-b"></Label>
         </ng-template>
+
     </ListView>
 
-    <Button text="Dodaj produkt" marginTop="20" [nsRouterLink]="['/add']"></Button>
-    <Button text="Ustawienia" marginTop="10" [nsRouterLink]="['/settings']"></Button>
+    <Button class="btn btn-primary mt-4"
+            text="Dodaj produkt"
+            [nsRouterLink]="['/add']"></Button>
+
+    <Button class="btn btn-secondary mt-2"
+            text="Ustawienia"
+            [nsRouterLink]="['/settings']"></Button>
 
 </StackLayout>
