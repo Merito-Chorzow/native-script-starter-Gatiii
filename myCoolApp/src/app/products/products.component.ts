@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { NativeScriptCommonModule, NativeScriptRouterModule } from "@nativescript/angular";
-import { RouterExtensions } from "@nativescript/angular";
+import {
+    NativeScriptCommonModule,
+    NativeScriptRouterModule,
+    RouterExtensions
+} from "@nativescript/angular";
+import { Page } from "@nativescript/core";
 import { ProductService } from "./product.service";
 
 @Component({
     selector: "Products",
     standalone: true,
-    imports: [
-        NativeScriptCommonModule,
-        NativeScriptRouterModule
-    ],
+    imports: [NativeScriptCommonModule, NativeScriptRouterModule],
     templateUrl: "./products.component.html",
 })
 export class ProductsComponent implements OnInit {
@@ -20,17 +21,31 @@ export class ProductsComponent implements OnInit {
 
     constructor(
         private productService: ProductService,
-        private router: RouterExtensions
+        private router: RouterExtensions,
+        private page: Page
     ) {}
 
-    async ngOnInit() {
+    ngOnInit() {
+        // Odpala SIĘ ZA KAŻDYM razem kiedy wracasz na ten widok
+        this.page.on(Page.navigatingToEvent, () => {
+            this.loadProducts();
+        });
+
+        // pierwsze ładowanie
+        this.loadProducts();
+    }
+
+    async loadProducts() {
+        this.loading = true;
+
         try {
             this.products = await this.productService.getProducts();
-        } catch (err) {
-            this.error = "Nie udało się pobrać produktów.";
-        } finally {
-            this.loading = false;
+            this.error = null;
+        } catch (e) {
+            this.error = "Błąd podczas pobierania listy.";
         }
+
+        this.loading = false;
     }
 
     onItemTap(event: any) {

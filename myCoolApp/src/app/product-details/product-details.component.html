@@ -1,29 +1,38 @@
 <ActionBar title="Szczegóły produktu"></ActionBar>
 
-<StackLayout class="p-4">
+<ScrollView>
+    <StackLayout class="p-4">
 
-    <Label *ngIf="loading" text="Ładowanie..." class="text-center mt-4"></Label>
+        <Label *ngIf="loading" text="Ładowanie..." class="text-center mt-4"></Label>
 
-    <Label *ngIf="error && !loading"
-           [text]="error"
-           class="text-red-500 text-center"></Label>
+        <Label *ngIf="error && !loading"
+               [text]="error"
+               class="text-red-500 text-center"></Label>
 
-    <StackLayout *ngIf="product && !loading">
+        <StackLayout *ngIf="product && !loading">
 
-        <Image [src]="product.thumbnail"
-               stretch="aspectFit"
-               height="200"
-               class="mb-4"></Image>
+            <!-- ZDJĘCIE PRODUKTU -->
+            <Image *ngIf="product.thumbnail"
+                   [src]="product.thumbnail.startsWith('data:') 
+                     ? product.thumbnail 
+                     : 'data:image/jpeg;base64,' + product.thumbnail"
+                   stretch="aspectFit"
+                   height="250"
+                   class="mb-4"></Image>
 
-        <Label [text]="product.title"
-               class="font-bold text-xl mb-2"></Label>
+            <!-- TYTUŁ -->
+            <Label [text]="product.title"
+                   class="font-bold text-xl mb-2"></Label>
 
-        <Label [text]="product.description"
-               class="text-base mb-2"></Label>
+            <!-- OPIS -->
+            <Label [text]="product.description"
+                   class="text-base mb-2"></Label>
 
-        <Label [text]="'Cena: ' + product.price + ' USD'"
-               class="text-lg text-green-600"></Label>
+            <!-- CENA -->
+            <Label [text]="'Cena: ' + product.price + ' USD'"
+                   class="text-lg text-green-600"></Label>
+
+        </StackLayout>
 
     </StackLayout>
-
-</StackLayout>
+</ScrollView>

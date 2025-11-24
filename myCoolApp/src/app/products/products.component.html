@@ -20,14 +20,15 @@
 
     </ListView>
 
+    <!-- POPRAWIONE -->
     <Button class="btn btn-primary mt-4"
             text="Dodaj produkt"
-            [nsRouterLink]="['/add']">
+            (tap)="goToAdd()">
     </Button>
 
     <Button class="btn btn-secondary mt-2"
             text="Ustawienia"
-            [nsRouterLink]="['/settings']">
+            (tap)="goToSettings()">
     </Button>
 
 </StackLayout>

@@ -1,10 +1,29 @@
 <ActionBar title="Dodaj produkt"></ActionBar>
 
-<StackLayout class="p-20">
+<ScrollView>
+  <StackLayout class="p-4">
+    <Label *ngIf="error" class="text-red-500 mb-2" [text]="error"></Label>
 
-    <TextField [(ngModel)]="name" hint="Nazwa"></TextField>
-    <TextField [(ngModel)]="code" hint="Kod"></TextField>
+    <TextField hint="Nazwa produktu"
+               [(ngModel)]="title"
+               class="mb-2 p-2 border rounded"></TextField>
 
-    <Button text="Zapisz" (tap)="save()"></Button>
+    <TextView hint="Opis"
+              [(ngModel)]="description"
+              class="mb-2 p-2 border rounded h-32"></TextView>
 
-</StackLayout>
+    <Button text="Zrób zdjęcie"
+            (tap)="takePhoto()"
+            class="btn btn-primary mb-4"></Button>
+
+    <Image *ngIf="photo"
+           [src]="'data:image/jpeg;base64,' + photo"
+           height="200"
+           stretch="aspectFit"
+           class="mb-4"></Image>
+
+    <Button text="Dodaj produkt"
+            (tap)="addProduct()"
+            class="btn btn-success"></Button>
+  </StackLayout>
+</ScrollView>
